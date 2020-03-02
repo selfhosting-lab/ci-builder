@@ -9,21 +9,14 @@ ENV USER='user' \
     ANSIBLE_VERSION='2.9.5' \
     TERRAFORM_VERSION='0.12.21' \
     RUBY_VERSION='2.7.0' \
-    BUNDLE_PATH="/usr/local/lib/bundle" \
-    GEM_HOME="/usr/local/lib/bundle/ruby/${RUBY_VERSION}" \
-    GEM_PATH="${GEM_HOME}"
-
-# Create GitLab builds directory
-RUN mkdir /builds \
- && chown 777 /builds
+    BUNDLE_DEFAULT_INSTALL_USES_PATH='true'
 
 # Set up user
 RUN groupadd -g 990 ${USER} \
  && useradd -r -u 990 -g ${USER} ${USER} -m -d ${HOME} \
  && mkdir -p ${HOME}/.ssh \
  && chown -R ${USER}:${USER} ${HOME} \
- && chmod 0700 ${HOME}/.ssh \
- &&echo "export PATH=${BUNDLE_PATH}/ruby/${RUBY_VERSION}/bin:\$PATH" >> /etc/bash.bashrc
+ && chmod 0700 ${HOME}/.ssh
 
 # Install Ansible
 RUN apt-get update \
@@ -35,10 +28,6 @@ RUN apt-get update \
 RUN curl -L -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
  && unzip -q /tmp/terraform.zip -d /usr/bin/ \
  && rm -f /tmp/terraform.zip
-
-# Install packages
-# COPY Gemfile /builds/Gemfile
-# RUN bundle install --clean --gemfile /builds/Gemfile && rm -f /builds/Gemfile && chown -R ${USER}:${USER} ${HOME}/.bundle
 
 # Runtime config
 USER root
