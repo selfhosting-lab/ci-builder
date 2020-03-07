@@ -7,7 +7,7 @@ steps:
   image: plugins/docker
   settings:
     auto_tag: true
-    repo: benfairless/ci-builder
+    repo: selfhostinglab/ci-builder
     username:
       from_secret: docker_username
     password:
