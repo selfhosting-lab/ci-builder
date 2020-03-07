@@ -1,5 +1,7 @@
 # ci-builder
 
+[![Drone build status](https://img.shields.io/drone/build/selfhosting-lab/ci-builder/master?label=BUILD&logo=drone&style=for-the-badge)](https://cloud.drone.io/selfhosting-lab/ci-builder/)
+
 ## Description
 
 Standardised Docker image for SHL CI pipeline
