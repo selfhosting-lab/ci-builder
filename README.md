@@ -12,7 +12,7 @@ Standardised Docker image for SHL CI pipeline based on Fedora 31.
 ## Features
 
 - Ansible `2.9.6`
-- Podman `1.8.1`
 - Python `3.7.6`
 - Ruby `2.6.5`
 - Terraform `0.12.24`
+- Docker CLI tools
