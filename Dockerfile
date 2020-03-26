@@ -8,7 +8,6 @@ ENV USER='user' \
     ANSIBLE_VERSION='2.9.6' \
     TERRAFORM_VERSION='0.12.24' \
     RUBY_VERSION='2.6.5' \
-    PODMAN_VERSION='1.8.1' \
     CA_CERTS='/etc/ssl/certs/ca-bundle.crt' \
     BUNDLE_DEFAULT_INSTALL_USES_PATH='true'
 
@@ -35,9 +34,8 @@ RUN dnf install -y "ruby-${RUBY_VERSION}" "ruby-devel-${RUBY_VERSION}" \
 RUN dnf install -y "python3-${PYTHON_VERSION}" python3-pip python3-passlib sshpass \
  && pip3 install ansible=="${ANSIBLE_VERSION}"
 
-# Install Podman
-RUN dnf install -y "podman-${PODMAN_VERSION}" "podman-docker-${PODMAN_VERSION}" \
- && touch /etc/containers/nodocker
+# Install Docker
+RUN dnf install -y "moby-engine"
 
 # Clean up
 RUN dnf clean all
