@@ -14,10 +14,13 @@ ENV USER='user' \
 
 # Set up user
 RUN groupadd -g 990 ${USER} \
- && useradd -r -u 990 -g ${USER} ${USER} -m
+ && useradd -r -u 990 -g ${USER} ${USER} -m \
+ && mkdir -p /builds \
+ && chown ${USER}:${USER} /builds
 
 # Install utilities
-RUN dnf install -y unzip curl git
+RUN dnf install -y unzip curl git which redhat-rpm-config gcc-c++ \
+    '@Development Tools' 
 
 # Install Terraform
 RUN curl -L -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
@@ -25,7 +28,8 @@ RUN curl -L -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TER
  && rm -f /tmp/terraform.zip
 
 # Install Ruby
-RUN dnf install -y "ruby-${RUBY_VERSION}" rubygems rubygem-bundler
+RUN dnf install -y "ruby-${RUBY_VERSION}" "ruby-devel-${RUBY_VERSION}" \
+    rubygems rubygem-bundler
 
 # Install Python & Ansible
 RUN dnf install -y "python3-${PYTHON_VERSION}" python3-pip python3-passlib sshpass \

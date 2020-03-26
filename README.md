@@ -7,7 +7,7 @@
 
 ## Description
 
-Standardised Docker image for SHL CI pipeline
+Standardised Docker image for SHL CI pipeline based on Fedora 31.
 
 ## Features
 
