@@ -8,6 +8,8 @@ Standardised Docker image for SHL CI pipeline
 
 ## Features
 
-- Ansible `2.9.5`
-- Terraform `0.12.21`
-- Ruby `2.7.0`
+- Ansible `2.9.6`
+- Podman `1.8.1`
+- Python `3.7.6`
+- Ruby `2.6.5`
+- Terraform `0.12.24`
